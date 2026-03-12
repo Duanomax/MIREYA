@@ -79,21 +79,33 @@ const platforms = [
     title: "Яндекс Музыка",
     text: "Профиль артиста и релизы МИРЭИ в Яндекс Музыке.",
     link: artist.yandexMusicUrl,
+    logo: "/images/platforms/yandex-music.png",
+    logoBg: "bg-black",
+    logoPad: "p-2.5",
   },
   {
     title: "VK Музыка",
     text: "Треки МИРЭИ на платформе VK Музыка.",
     link: artist.vkMusicUrl,
+    logo: "/images/platforms/vk-music.png",
+    logoBg: "bg-black",
+    logoPad: "p-2.5",
   },
   {
     title: "Звук",
     text: "Страница артистки МИРЭЯ на платформе Звук.",
     link: artist.zvukUrl,
+    logo: "/images/platforms/zvuk.png",
+    logoBg: "bg-black",
+    logoPad: "p-2.5",
   },
   {
     title: "Apple Music",
     text: "Каталог релизов МИРЭИ в Apple Music.",
     link: artist.appleMusicUrl,
+    logo: "/images/platforms/apple-music.png",
+    logoBg: "bg-white",
+    logoPad: "p-2",
   },
 ];
 
@@ -119,8 +131,8 @@ const gallery = [
   { src: "/images/1.jpg", alt: "МИРЭЯ 1" },
   { src: "/images/2.jpg", alt: "МИРЭЯ 2" },
   { src: "/images/3.jpg", alt: "МИРЭЯ 3" },
-  { src: "/images/4.jpg", alt: "МИРЭЯ 4" },
-  { src: "/images/5.jpg", alt: "МИРЭЯ 5" },
+  { src: "/images/4.png", alt: "МИРЭЯ 4" },
+  { src: "/images/5.png", alt: "МИРЭЯ 5" },
   { src: "/images/6.jpg", alt: "МИРЭЯ 6" },
 ];
 
@@ -155,9 +167,13 @@ function SectionHeading({
 function PlatformLogo({
   src,
   title,
+  logoBg,
+  logoPad,
 }: {
   src: string;
   title: string;
+  logoBg: string;
+  logoPad: string;
 }) {
   const [failed, setFailed] = React.useState(false);
 
@@ -180,16 +196,22 @@ function PlatformLogo({
           : "bg-white text-black";
 
   return (
-    <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[#0B0B0B] p-2 shadow-[0_8px_30px_rgba(0,0,0,0.25)]">
+    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-[#0B0B0B] shadow-[0_8px_30px_rgba(0,0,0,0.25)]">
       {!failed ? (
-        <img
-          src={src}
-          alt={title}
-          className="h-full w-full object-contain"
-          onError={() => setFailed(true)}
-        />
+        <div
+          className={`flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl ${logoBg} ${logoPad}`}
+        >
+          <img
+            src={src}
+            alt={title}
+            className="h-full w-full object-contain"
+            onError={() => setFailed(true)}
+          />
+        </div>
       ) : (
-        <div className={`flex h-full w-full items-center justify-center rounded-xl text-sm font-bold ${fallbackClass}`}>
+        <div
+          className={`flex h-11 w-11 items-center justify-center rounded-xl text-sm font-bold ${fallbackClass}`}
+        >
           {fallbackLabel}
         </div>
       )}
@@ -394,7 +416,12 @@ export default function App() {
                   className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6 transition hover:bg-white/[0.06]"
                 >
                   <div className="flex items-center gap-4">
-                    <PlatformLogo src={platform.logo} title={platform.title} />
+                    <PlatformLogo
+                      src={platform.logo}
+                      title={platform.title}
+                      logoBg={platform.logoBg}
+                      logoPad={platform.logoPad}
+                    />
                     <div className="min-w-0">
                       <div className="text-[26px] font-semibold leading-tight text-white">
                         {platform.title}
@@ -402,9 +429,7 @@ export default function App() {
                     </div>
                   </div>
 
-                  <p className="mt-5 text-sm leading-8 text-white/60">
-                    {platform.text}
-                  </p>
+                  <p className="mt-5 text-sm leading-8 text-white/60">{platform.text}</p>
 
                   <div className="mt-6 inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.12em] text-white">
                     Открыть <ArrowRight className="h-4 w-4" />
