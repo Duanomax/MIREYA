@@ -80,32 +80,24 @@ const platforms = [
     text: "Профиль артиста и релизы МИРЭИ в Яндекс Музыке.",
     link: artist.yandexMusicUrl,
     logo: "/images/platforms/yandex-music.png",
-    logoBg: "bg-black",
-    logoPad: "p-2.5",
   },
   {
     title: "VK Музыка",
     text: "Треки МИРЭИ на платформе VK Музыка.",
     link: artist.vkMusicUrl,
     logo: "/images/platforms/vk-music.png",
-    logoBg: "bg-black",
-    logoPad: "p-2.5",
   },
   {
     title: "Звук",
     text: "Страница артистки МИРЭЯ на платформе Звук.",
     link: artist.zvukUrl,
     logo: "/images/platforms/zvuk.png",
-    logoBg: "bg-black",
-    logoPad: "p-2.5",
   },
   {
     title: "Apple Music",
     text: "Каталог релизов МИРЭИ в Apple Music.",
     link: artist.appleMusicUrl,
     logo: "/images/platforms/apple-music.png",
-    logoBg: "bg-white",
-    logoPad: "p-2",
   },
 ];
 
@@ -137,7 +129,7 @@ const gallery = [
 ];
 
 function Container({ children }: { children: React.ReactNode }) {
-  return <div className="mx-auto max-w-7xl px-6 lg:px-8">{children}</div>;
+  return <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">{children}</div>;
 }
 
 function SectionHeading({
@@ -150,13 +142,15 @@ function SectionHeading({
   text?: string;
 }) {
   return (
-    <div className="mb-8 md:mb-12">
-      <div className="mb-3 text-xs tracking-[0.35em] text-white/45">{kicker}</div>
-      <h2 className="text-3xl font-semibold tracking-tight text-white md:text-5xl">
+    <div className="mb-7 md:mb-12">
+      <div className="mb-2 text-[10px] tracking-[0.32em] text-white/45 sm:text-xs sm:tracking-[0.35em]">
+        {kicker}
+      </div>
+      <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-5xl">
         {title}
       </h2>
       {text ? (
-        <p className="mt-4 max-w-2xl text-sm leading-7 text-white/65 md:text-base">
+        <p className="mt-3 max-w-2xl text-sm leading-6 text-white/65 md:mt-4 md:text-base md:leading-7">
           {text}
         </p>
       ) : null}
@@ -167,69 +161,28 @@ function SectionHeading({
 function PlatformLogo({
   src,
   title,
-  logoBg,
-  logoPad,
 }: {
   src: string;
   title: string;
-  logoBg: string;
-  logoPad: string;
 }) {
-  const [failed, setFailed] = React.useState(false);
-
-  const fallbackLabel =
-    title === "Яндекс Музыка"
-      ? "Я"
-      : title === "VK Музыка"
-        ? "VK"
-        : title === "Звук"
-          ? "Z"
-          : "";
-
-  const fallbackClass =
-    title === "Яндекс Музыка"
-      ? "bg-[#FC3F1D] text-white"
-      : title === "VK Музыка"
-        ? "bg-[#2787F5] text-white"
-        : title === "Звук"
-          ? "bg-[#19E27D] text-black"
-          : "bg-white text-black";
-
   return (
-    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-[#0B0B0B] shadow-[0_8px_30px_rgba(0,0,0,0.25)]">
-      {!failed ? (
-        <div
-          className={`flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl ${logoBg} ${logoPad}`}
-        >
-          <img
-            src={src}
-            alt={title}
-            className="h-full w-full object-contain"
-            onError={() => setFailed(true)}
-          />
-        </div>
-      ) : (
-        <div
-          className={`flex h-11 w-11 items-center justify-center rounded-xl text-sm font-bold ${fallbackClass}`}
-        >
-          {fallbackLabel}
-        </div>
-      )}
+    <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[#0B0B0B] p-2 shadow-[0_8px_30px_rgba(0,0,0,0.25)] sm:h-14 sm:w-14 sm:p-2.5">
+      <img src={src} alt={title} className="h-full w-full object-contain" />
     </div>
   );
 }
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#050505] text-white">
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-black/40 backdrop-blur-xl">
+    <div className="min-h-screen bg-[#050505] pb-24 text-white md:pb-0">
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-black/35 backdrop-blur-xl">
         <Container>
-          <div className="flex items-center justify-between py-4">
+          <div className="flex items-center justify-between py-3.5 md:py-4">
             <div>
-              <div className="text-xl font-semibold uppercase tracking-[0.22em]">
+              <div className="text-base font-semibold uppercase tracking-[0.18em] sm:text-lg md:text-xl md:tracking-[0.22em]">
                 {artist.name}
               </div>
-              <div className="text-[11px] uppercase tracking-[0.25em] text-white/45">
+              <div className="text-[10px] uppercase tracking-[0.2em] text-white/45 md:text-[11px] md:tracking-[0.25em]">
                 {artist.subtitle}
               </div>
             </div>
@@ -254,7 +207,7 @@ export default function App() {
 
             <a
               href="#contacts"
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-black transition hover:scale-[1.02]"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white px-3.5 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-black transition hover:scale-[1.02] sm:px-4 md:text-xs md:tracking-[0.2em]"
             >
               Букинг
             </a>
@@ -263,7 +216,7 @@ export default function App() {
       </header>
 
       <main>
-        <section className="relative min-h-[100vh] overflow-hidden border-b border-white/10">
+        <section className="relative min-h-[88vh] overflow-hidden border-b border-white/10 md:min-h-[100vh]">
           <video
             className="absolute inset-0 h-full w-full object-cover"
             src={heroVideo}
@@ -274,51 +227,52 @@ export default function App() {
           />
 
           <div className="absolute inset-0 bg-black/45" />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.18)_0%,rgba(0,0,0,0.48)_55%,rgba(0,0,0,0.82)_100%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.12),transparent_25%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.20)_0%,rgba(0,0,0,0.44)_45%,rgba(0,0,0,0.85)_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14),transparent_24%)]" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(5,5,5,0.92)_100%)] md:hidden" />
 
           <Container>
-            <div className="relative z-10 flex min-h-[100vh] items-end py-14 md:py-20">
+            <div className="relative z-10 flex min-h-[88vh] items-end py-10 md:min-h-[100vh] md:py-20">
               <motion.div
                 initial={{ opacity: 0, y: 28 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.75 }}
-                className="max-w-4xl pb-4 md:pb-10"
+                className="max-w-4xl pb-2 sm:pb-4 md:pb-10"
               >
-                <div className="mb-4 text-xs uppercase tracking-[0.4em] text-white/55">
+                <div className="mb-3 text-[10px] uppercase tracking-[0.34em] text-white/55 sm:text-xs md:mb-4 md:tracking-[0.4em]">
                   {artist.premiereLabel}
                 </div>
 
-                <h1 className="text-5xl font-semibold uppercase leading-[0.9] tracking-tight md:text-7xl xl:text-[112px]">
+                <h1 className="text-4xl font-semibold uppercase leading-[0.92] tracking-tight sm:text-5xl md:text-7xl xl:text-[112px]">
                   {artist.name}
                 </h1>
 
-                <div className="mt-5 text-2xl font-medium text-white/90 md:text-4xl">
+                <div className="mt-4 text-xl font-medium text-white/90 sm:text-2xl md:mt-5 md:text-4xl">
                   {artist.premiereTitle}
                 </div>
 
-                <p className="mt-5 max-w-xl text-sm leading-7 text-white/75 md:text-base">
+                <p className="mt-4 max-w-xl text-sm leading-6 text-white/75 sm:text-[15px] md:mt-5 md:text-base md:leading-7">
                   {artist.premiereText}
                 </p>
 
-                <div className="mt-8 flex flex-wrap gap-3">
+                <div className="mt-7 flex flex-wrap gap-3 md:mt-8">
                   <a
                     href={artist.mainTrackUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-black transition hover:scale-[1.02]"
+                    className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-black transition hover:scale-[1.02] md:min-h-0"
                   >
                     <Play className="h-4 w-4" />
                     Слушать
                   </a>
                 </div>
 
-                <div className="mt-8 flex flex-wrap gap-3 text-sm text-white/80">
+                <div className="mt-6 flex flex-wrap gap-2.5 text-sm text-white/80 md:mt-8 md:gap-3">
                   <a
                     href={artist.yandexMusicUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-full border border-white/15 bg-black/20 px-4 py-2 transition hover:bg-white/10"
+                    className="rounded-full border border-white/15 bg-black/20 px-3.5 py-2 transition hover:bg-white/10 md:px-4"
                   >
                     Яндекс Музыка
                   </a>
@@ -326,7 +280,7 @@ export default function App() {
                     href={artist.youtubeUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-full border border-white/15 bg-black/20 px-4 py-2 transition hover:bg-white/10"
+                    className="rounded-full border border-white/15 bg-black/20 px-3.5 py-2 transition hover:bg-white/10 md:px-4"
                   >
                     YouTube
                   </a>
@@ -334,7 +288,7 @@ export default function App() {
                     href={artist.instagramUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-full border border-white/15 bg-black/20 px-4 py-2 transition hover:bg-white/10"
+                    className="rounded-full border border-white/15 bg-black/20 px-3.5 py-2 transition hover:bg-white/10 md:px-4"
                   >
                     Instagram
                   </a>
@@ -342,7 +296,7 @@ export default function App() {
                     href={artist.vkUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-full border border-white/15 bg-black/20 px-4 py-2 transition hover:bg-white/10"
+                    className="rounded-full border border-white/15 bg-black/20 px-3.5 py-2 transition hover:bg-white/10 md:px-4"
                   >
                     VK
                   </a>
@@ -352,7 +306,7 @@ export default function App() {
           </Container>
         </section>
 
-        <section id="releases" className="border-b border-white/10 py-16 md:py-24">
+        <section id="releases" className="border-b border-white/10 py-10 md:py-24">
           <Container>
             <SectionHeading
               kicker="РЕЛИЗЫ"
@@ -360,11 +314,11 @@ export default function App() {
               text="Песни МИРЭИ — искренние, вдохновлённые и эмоциональные. В каждом треке — личная история, настроение и желание оставить после себя настоящее чувство."
             />
 
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-4 sm:gap-5 md:grid-cols-2 md:gap-6 xl:grid-cols-3">
               {releases.map((item) => (
                 <div
                   key={item.title}
-                  className="group overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.03]"
+                  className="group overflow-hidden rounded-[24px] border border-white/10 bg-white/[0.03] sm:rounded-[28px]"
                 >
                   <div className="aspect-square overflow-hidden bg-[linear-gradient(180deg,rgba(255,255,255,0.10),rgba(255,255,255,0.02))]">
                     <img
@@ -374,14 +328,16 @@ export default function App() {
                     />
                   </div>
 
-                  <div className="p-5">
-                    <div className="text-xs uppercase tracking-[0.25em] text-white/40">
+                  <div className="p-4 sm:p-5">
+                    <div className="text-[11px] uppercase tracking-[0.22em] text-white/40 sm:text-xs sm:tracking-[0.25em]">
                       {item.year} | {item.type}
                     </div>
 
-                    <div className="mt-3 text-xl font-semibold">{item.title}</div>
+                    <div className="mt-3 text-lg font-semibold sm:text-xl">{item.title}</div>
 
-                    <p className="mt-3 text-sm leading-7 text-white/60">{item.text}</p>
+                    <p className="mt-2 text-sm leading-6 text-white/60 sm:mt-3">
+                      {item.text}
+                    </p>
 
                     <a
                       href={item.link}
@@ -398,7 +354,7 @@ export default function App() {
           </Container>
         </section>
 
-        <section id="platforms" className="border-b border-white/10 py-16 md:py-24">
+        <section id="platforms" className="border-b border-white/10 py-10 md:py-24">
           <Container>
             <SectionHeading
               kicker="СЛУШАТЬ"
@@ -406,32 +362,27 @@ export default function App() {
               text="Слушайте треки МИРЭИ на всех музыкальных платформах."
             />
 
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            <div className="grid gap-4 sm:gap-5 md:grid-cols-2 md:gap-6 xl:grid-cols-4">
               {platforms.map((platform) => (
                 <a
                   key={platform.title}
                   href={platform.link}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6 transition hover:bg-white/[0.06]"
+                  className="rounded-[24px] border border-white/10 bg-white/[0.03] p-4 transition hover:bg-white/[0.06] sm:rounded-[28px] sm:p-5 md:p-6"
                 >
-                  <div className="flex items-center gap-4">
-                    <PlatformLogo
-                      src={platform.logo}
-                      title={platform.title}
-                      logoBg={platform.logoBg}
-                      logoPad={platform.logoPad}
-                    />
-                    <div className="min-w-0">
-                      <div className="text-[26px] font-semibold leading-tight text-white">
-                        {platform.title}
-                      </div>
+                  <div className="flex items-center gap-3.5 sm:gap-4">
+                    <PlatformLogo src={platform.logo} title={platform.title} />
+                    <div className="min-w-0 text-xl font-semibold leading-tight text-white sm:text-2xl">
+                      {platform.title}
                     </div>
                   </div>
 
-                  <p className="mt-5 text-sm leading-8 text-white/60">{platform.text}</p>
+                  <p className="mt-3 text-sm leading-6 text-white/60 sm:mt-4">
+                    {platform.text}
+                  </p>
 
-                  <div className="mt-6 inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.12em] text-white">
+                  <div className="mt-5 inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.12em] text-white sm:mt-6">
                     Открыть <ArrowRight className="h-4 w-4" />
                   </div>
                 </a>
@@ -440,7 +391,7 @@ export default function App() {
           </Container>
         </section>
 
-        <section id="socials" className="border-b border-white/10 py-16 md:py-24">
+        <section id="socials" className="border-b border-white/10 py-10 md:py-24">
           <Container>
             <SectionHeading
               kicker="СОЦСЕТИ"
@@ -448,30 +399,32 @@ export default function App() {
               text="Основные официальные площадки МИРЭИ, где выходят клипы, фото, новые публикации и анонсы."
             />
 
-            <div className="grid gap-6 lg:grid-cols-3">
+            <div className="grid gap-4 sm:gap-5 lg:grid-cols-3 lg:gap-6">
               {socials.map((social) => (
                 <a
                   key={social.title}
                   href={social.link}
                   target="_blank"
                   rel="noreferrer"
-                  className="overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.03] transition hover:bg-white/[0.06]"
+                  className="overflow-hidden rounded-[24px] border border-white/10 bg-white/[0.03] transition hover:bg-white/[0.06] sm:rounded-[28px]"
                 >
-                  <div className="relative flex aspect-video items-center justify-center bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white text-black shadow-lg shadow-black/20">
+                  <div className="relative flex aspect-[16/9] items-center justify-center bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-black shadow-lg shadow-black/20 sm:h-16 sm:w-16">
                       {social.title === "YouTube" ? (
-                        <Youtube className="h-6 w-6" />
+                        <Youtube className="h-5 w-5 sm:h-6 sm:w-6" />
                       ) : social.title === "Instagram" ? (
-                        <Instagram className="h-6 w-6" />
+                        <Instagram className="h-5 w-5 sm:h-6 sm:w-6" />
                       ) : (
-                        <span className="text-sm font-bold uppercase">VK</span>
+                        <span className="text-xs font-bold uppercase sm:text-sm">VK</span>
                       )}
                     </div>
                   </div>
 
-                  <div className="p-5">
-                    <div className="text-lg font-semibold">{social.title}</div>
-                    <p className="mt-3 text-sm leading-7 text-white/60">{social.text}</p>
+                  <div className="p-4 sm:p-5">
+                    <div className="text-lg font-semibold sm:text-xl">{social.title}</div>
+                    <p className="mt-2 text-sm leading-6 text-white/60 sm:mt-3">
+                      {social.text}
+                    </p>
                     <div className="mt-5 inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.12em] text-white">
                       Открыть <ArrowRight className="h-4 w-4" />
                     </div>
@@ -482,7 +435,7 @@ export default function App() {
           </Container>
         </section>
 
-        <section id="gallery" className="border-b border-white/10 py-16 md:py-24">
+        <section id="gallery" className="border-b border-white/10 py-10 md:py-24">
           <Container>
             <SectionHeading
               kicker="ФОТО"
@@ -490,11 +443,11 @@ export default function App() {
               text="Актуальные фотографии МИРЭИ: сценические, портретные и lifestyle-кадры."
             />
 
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
               {gallery.map((item) => (
                 <div
                   key={item.src}
-                  className="overflow-hidden rounded-[24px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.10),rgba(255,255,255,0.02))]"
+                  className="overflow-hidden rounded-[20px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.10),rgba(255,255,255,0.02))] sm:rounded-[24px]"
                 >
                   <img
                     src={item.src}
@@ -507,7 +460,7 @@ export default function App() {
           </Container>
         </section>
 
-        <section id="contacts" className="py-16 md:py-24">
+        <section id="contacts" className="py-10 md:py-24">
           <Container>
             <SectionHeading
               kicker="КОНТАКТЫ"
@@ -515,17 +468,19 @@ export default function App() {
               text="Главное здесь — быстро найти почту для букинга и перейти на официальные страницы артистки."
             />
 
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6">
-                <div className="text-xs uppercase tracking-[0.25em] text-white/40">Букинг</div>
+            <div className="grid gap-4 sm:gap-5 md:grid-cols-2 md:gap-6 xl:grid-cols-3">
+              <div className="rounded-[24px] border border-white/10 bg-white/[0.03] p-4 sm:rounded-[28px] sm:p-6">
+                <div className="text-[11px] uppercase tracking-[0.22em] text-white/40 sm:text-xs sm:tracking-[0.25em]">
+                  Букинг
+                </div>
                 <div className="mt-4 flex items-start gap-3 text-sm text-white/85">
-                  <Mail className="mt-0.5 h-4 w-4" />
+                  <Mail className="mt-0.5 h-4 w-4 shrink-0" />
                   {artist.bookingEmail}
                 </div>
               </div>
 
-              <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6">
-                <div className="text-xs uppercase tracking-[0.25em] text-white/40">
+              <div className="rounded-[24px] border border-white/10 bg-white/[0.03] p-4 sm:rounded-[28px] sm:p-6">
+                <div className="text-[11px] uppercase tracking-[0.22em] text-white/40 sm:text-xs sm:tracking-[0.25em]">
                   Основные площадки
                 </div>
                 <div className="mt-4 flex flex-wrap gap-3 text-sm text-white/85">
@@ -564,11 +519,11 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6">
-                <div className="text-xs uppercase tracking-[0.25em] text-white/40">
+              <div className="rounded-[24px] border border-white/10 bg-white/[0.03] p-4 sm:rounded-[28px] sm:p-6">
+                <div className="text-[11px] uppercase tracking-[0.22em] text-white/40 sm:text-xs sm:tracking-[0.25em]">
                   Официальный сайт
                 </div>
-                <p className="mt-4 text-sm leading-7 text-white/70">
+                <p className="mt-4 text-sm leading-6 text-white/70 md:leading-7">
                   Официальный сайт певицы МИРЭЯ. Здесь собраны актуальные релизы,
                   ссылки на площадки, фото и информация для связи по выступлениям.
                 </p>
@@ -577,6 +532,17 @@ export default function App() {
           </Container>
         </section>
       </main>
+
+      <div className="fixed bottom-4 left-4 right-4 z-50 md:hidden">
+        <a
+          href={artist.mainTrackUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="flex min-h-[54px] items-center justify-center rounded-full bg-white px-5 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-black shadow-[0_20px_50px_rgba(0,0,0,0.35)]"
+        >
+          Слушать
+        </a>
+      </div>
     </div>
   );
 }
