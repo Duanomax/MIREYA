@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Play, Mail, ArrowRight, Youtube, Instagram } from "lucide-react";
 
-const heroVideo = "/video/hero.mp4";
+const heroVideo = "/video/Hero.mp4";
 
 const artist = {
   name: "МИРЭЯ",
